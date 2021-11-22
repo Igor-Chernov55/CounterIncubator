@@ -1,0 +1,10 @@
+.incorrectTrue {
+    display: none;
+    color: aquamarine;
+}
+
+.incorrectFalse {
+    display: block;
+    color: red;
+    font-weight: bold;
+}
