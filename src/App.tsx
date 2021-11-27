@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Counter} from "./CounterNumbers/Counter";
 import {CounterTask} from "./CounterNumbers/CounterTask/CounterTask";
@@ -7,59 +7,55 @@ import classes from './CounterNumbers/Counter.module.css'
 function App() {
     let [num, setNum] = useState(0)
 
-    let [maxVal, setMaxVal] = useState('')
-    let [minVal, setMinVal] = useState('')
+    let [maxVal, setMaxVal] = useState(1)
+    let [minVal, setMinVal] = useState(0)
 
-    let [disabled, setDiasbled] = useState(false)
-    let [disabled2, setDiasbled2] = useState(true)
-    let [error, setError] = useState(true)
+    let [disabled, setDiasbled] = useState<boolean>(false)
+    let [disabled2, setDiasbled2] = useState<boolean>(true)
 
-    const ButtonClickForNumber = () => {
-
+    const buttonClickForNumber = () => {
         setNum(num + 1)
-        if (num >= 4) {
+
+        if (maxVal === num + 1) {
             setDiasbled(true)
         }
         setDiasbled2(false)
 
     }
 
-
     const resetClick = () => {
-        setNum(0)
-
+        setNum(minVal)
         setDiasbled(false)
         setDiasbled2(true)
     }
 
-    useEffect(() => {
-        console.log('SYNCE')
-        if (maxVal == minVal && minVal < '0') {
-            setError(false)
-        }else{
-            setError(true)
-        }
-
-    },[])
 
     return (
         <div className={classes.main}>
+            <CounterTask
+                number={num}
+                setNumber={setNum}
+                minVal={minVal}
+                maxVal={maxVal}
+                setMaxVal={setMaxVal}
+                setMinVal={setMinVal}
+                setDisabled={setDiasbled}
+                setDisabled2={setDiasbled2}
+            />
+
             <Counter
                 number={num}
-                ButtonClickForNumber={ButtonClickForNumber}
+                minVal={minVal}
+                maxVal={maxVal}
+                counter={buttonClickForNumber}
                 resetClick={resetClick}
                 disabled={disabled}
                 disabled2={disabled2}
+                setDisabled={setDiasbled}
+                setDisabled2={setDiasbled2}
             />
 
-            <CounterTask
-                minVal={minVal}
-                setMaxVal={setMaxVal}
-                setMinVal={setMinVal}
-                maxVal={maxVal}
-                error={error}
-                disabled={disabled}
-                disabled2={disabled2}/>
+
         </div>
     );
 }

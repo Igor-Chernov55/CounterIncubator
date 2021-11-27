@@ -5,22 +5,29 @@ type PropsType = {
     number: number
     disabled: boolean
     disabled2: boolean
-    ButtonClickForNumber: () => void
+    minVal: number
+    maxVal: number
+    counter: () => void
     resetClick: () => void
+    setDisabled: (e: boolean) => void
+    setDisabled2: (e: boolean) => void
 }
 
-export const Counter: React.FC<PropsType> = ({number, disabled, disabled2, ...props}) => {
+export const Counter = ({number, disabled, disabled2, ...props} : PropsType) => {
+
 
     return (
         <div>
             <div className={classes.container}>
-                <button className={disabled ? classes.buttonNumd : classes.buttonNum}>
+                <span className={disabled ? classes.buttonNumd : classes.buttonNum}>
                     {number}
-                </button>
+
+                </span>
                 <div className={classes.containerButton}>
                     <button className={disabled ? classes.buttonNumEnd : classes.button}
                             disabled={disabled}
-                            onClick={props.ButtonClickForNumber}>
+                            onClick={props.counter}
+                                >
                         inc
                     </button>
 

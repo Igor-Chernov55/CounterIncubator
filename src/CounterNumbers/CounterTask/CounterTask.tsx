@@ -2,58 +2,75 @@ import React, {ChangeEventHandler} from 'react';
 import classes from './CouterTask.module.css'
 
 type PropsType = {
-    setMaxVal: (value: string) => void
-    setMinVal: (value: string) => void
-    minVal: string
-    maxVal: string
-    error: boolean
-    disabled: boolean;
-    disabled2: boolean;
+    number: number
+    minVal: number
+    maxVal: number
+    setNumber: (value: number) => void
+    setMaxVal: (value: number) => void
+    setMinVal: (value: number) => void
+    setDisabled: (e: boolean) => void
+    setDisabled2: (e: boolean) => void
+
 }
 
-export const CounterTask = ({error,...props}: PropsType) => {
+export const CounterTask = (props: PropsType) => {
 
-    const onChangeHandlerMax:ChangeEventHandler<HTMLInputElement> = (e) => {
-        props.setMaxVal(e.currentTarget.value)
+    const onChangeHandlerMax: ChangeEventHandler<HTMLInputElement> = (e) => {
+        props.setMaxVal(+e.currentTarget.value)
     }
 
-    const onChangeHandlerMin:ChangeEventHandler<HTMLInputElement> = (e) => {
-        props.setMinVal(e.currentTarget.max)
+    const onChangeHandlerMin: ChangeEventHandler<HTMLInputElement> = (e) => {
+        props.setMinVal(+e.currentTarget.value)
+    }
+
+   const CounterTaskCallback = () => {
+        props.setNumber(props.minVal)
+        if (props.maxVal === props.minVal) {
+            props.setDisabled(true)
+        }
+        props.setDisabled2(false )
     }
 
     return (
-        <div>
-            <div>
-                <div>
-                    <div className={error ? classes.incorrectTrue : classes.incorrectFalse}>Incorrect value</div>
-                    <span>Max value</span>
+        <div className={classes.container}>
+            <div className={classes.taskBlock}>
+                <div className={classes.task}>
+
+                    <div
+                        className={props.minVal === props.maxVal || props.minVal < 0 ? classes.incorrectFalse : classes.incorrectTrue}>Incorrect
+                        value
+                    </div>
+
+                    <span className={classes.spanText}>Max value</span>
                     <input
                         type="number"
-                        id="tentacles"
+                        id="01"
                         name="max value"
-                        min="-1"
-                        max="100"
                         value={props.maxVal}
                         onChange={onChangeHandlerMax}
                     />
                 </div>
-                <div>
-                    <div className={error ? classes.incorrectTrue : classes.incorrectFalse}>Incorrect value</div>
-                    <span>Min value</span>
+                <div className={classes.task}>
+
+                    <div
+                        className={props.minVal === props.maxVal || props.minVal < 0 ? classes.incorrectFalse : classes.incorrectTrue}>Incorrect
+                        value
+                    </div>
+
+                    <span className={classes.spanText}>Min value</span>
                     <input
                         type="number"
-                        id="tentacles"
+                        id="02"
                         name="start value"
-                        min="-1"
-                        max="100"
                         onChange={onChangeHandlerMin}
                         value={props.minVal}
                     />
                 </div>
+                <div className={classes.setBlock}>
+                    <button disabled={props.minVal === props.maxVal || props.minVal < 0 || props.maxVal < 0} onClick={CounterTaskCallback}>SET</button>
+                </div>
             </div>
-            <div>
-                <button>SET</button>
-            </div>
+
         </div>
     );
 };
