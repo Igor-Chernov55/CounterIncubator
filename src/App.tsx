@@ -3,6 +3,7 @@ import './App.css';
 import {Counter} from "./CounterNumbers/Counter";
 import {CounterTask} from "./CounterNumbers/CounterTask/CounterTask";
 import classes from './CounterNumbers/Counter.module.css'
+import {ContainerCounter} from "./CounterNumbers/ContainerCounter";
 
 function App() {
     let [num, setNum] = useState(0)
@@ -43,17 +44,20 @@ function App() {
                 setDisabled2={setDiasbled2}
             />
 
-            <Counter
-                number={num}
-                minVal={minVal}
-                maxVal={maxVal}
-                counter={buttonClickForNumber}
-                resetClick={resetClick}
-                disabled={disabled}
-                disabled2={disabled2}
-                setDisabled={setDiasbled}
-                setDisabled2={setDiasbled2}
-            />
+
+            <ContainerCounter />
+            {/*<Counter*/}
+            {/*    number={num}*/}
+            {/*    setNumber={setNum}*/}
+            {/*    minVal={minVal}*/}
+            {/*    maxVal={maxVal}*/}
+            {/*    counter={buttonClickForNumber}*/}
+            {/*    resetClick={resetClick}*/}
+            {/*    disabled={disabled}*/}
+            {/*    disabled2={disabled2}*/}
+            {/*    setDisabled={setDiasbled}*/}
+            {/*    setDisabled2={setDiasbled2}*/}
+            {/*/>*/}
 
 
         </div>

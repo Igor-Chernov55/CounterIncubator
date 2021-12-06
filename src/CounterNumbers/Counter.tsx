@@ -1,39 +1,48 @@
 import React from 'react'
 import classes from './Counter.module.css'
+import {CounterPropsType} from "./ContainerCounter";
 
-type PropsType = {
-    number: number
-    disabled: boolean
-    disabled2: boolean
-    minVal: number
-    maxVal: number
-    counter: () => void
-    resetClick: () => void
-    setDisabled: (e: boolean) => void
-    setDisabled2: (e: boolean) => void
-}
+// export type PropsType = {
+//     number: number
+//     setNumber: (value: number) => void
+//     disabled: boolean
+//     disabled2: boolean
+//     minVal: number
+//     maxVal: number
+//     counter: () => void
+//     resetClick: () => void
+//     setDisabled: (e: boolean) => void
+//     setDisabled2: (e: boolean) => void
+// }
 
-export const Counter = ({number, disabled, disabled2, ...props} : PropsType) => {
+export const Counter = (props : CounterPropsType) => {
 
+    const resetClickHandler = () => {
+        props.resetClick()
+    }
+
+    const counterHandler = () => {
+        props.counter()
+    }
 
     return (
         <div>
             <div className={classes.container}>
                 <span className={disabled ? classes.buttonNumd : classes.buttonNum}>
-                    {number}
+                    {props.counter.number}
 
                 </span>
                 <div className={classes.containerButton}>
                     <button className={disabled ? classes.buttonNumEnd : classes.button}
                             disabled={disabled}
-                            onClick={props.counter}
+                            onClick={counterHandler}
                                 >
                         inc
                     </button>
 
                     <button className={!disabled2 ? classes.button : classes.buttonNumEnd}
                             disabled={disabled2}
-                            onClick={props.resetClick}>
+                            onClick={resetClickHandler}>
                         reset
                     </button>
                 </div>
