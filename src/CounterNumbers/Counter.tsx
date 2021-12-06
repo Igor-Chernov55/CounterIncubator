@@ -1,21 +1,20 @@
 import React from 'react'
 import classes from './Counter.module.css'
-import {CounterPropsType} from "./ContainerCounter";
 
-// export type PropsType = {
-//     number: number
-//     setNumber: (value: number) => void
-//     disabled: boolean
-//     disabled2: boolean
-//     minVal: number
-//     maxVal: number
-//     counter: () => void
-//     resetClick: () => void
-//     setDisabled: (e: boolean) => void
-//     setDisabled2: (e: boolean) => void
-// }
+ export type PropsType = {
+     number: number
+     setNumber: (value: number) => void
+     disabled: boolean
+     disabled2: boolean
+     minVal: number
+     maxVal: number
+     counter: () => void
+     resetClick: () => void
+     setDisabled: (e: boolean) => void
+     setDisabled2: (e: boolean) => void
+ }
 
-export const Counter = (props : CounterPropsType) => {
+export const Counter = (props : PropsType) => {
 
     const resetClickHandler = () => {
         props.resetClick()
@@ -28,7 +27,7 @@ export const Counter = (props : CounterPropsType) => {
     return (
         <div>
             <div className={classes.container}>
-                <span className={disabled ? classes.buttonNumd : classes.buttonNum}>
+                <span className={props.disabled ? classes.buttonNumd : classes.buttonNum}>
                     {props.counter.number}
 
                 </span>

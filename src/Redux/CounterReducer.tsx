@@ -1,35 +1,51 @@
 
 
-
-type CounterReducerType = {
-  counter: PropsType
+const initialState: InitialStateType = {
+    num: 0,
+    maxValue: 1,
+    minValue: 0,
+    disabled: false
 }
 
-export const counterReducer = (state: CounterReducerType, action: ActionType) => {
+export type InitialStateType = {
+  num: number
+  maxValue: number
+  minValue: number
+  disabled: boolean
+}
+
+export const counterReducer = (state: InitialStateType = initialState, action: ActionType) => {
   switch (action.type) {
+
     case "BUTTON_CLICK_NUMBER": {
-      return  state.counter.setNumber(state.counter.number + 1)
-
-      if (state.counter.maxVal === state.counter.number + 1) {
-        state.counter.setDisabled(true)
+      return {
+        ...state,
+        num: state.num + 1
       }
-      state.counter.setDisabled2(false)
-
     }
 
     case "BUTTON_RESET": {
-      return  state.counter.setNumber(state.counter.minVal)
-      state.counter.setDisabled(false)
-      state.counter.setDisabled2(true)
+        return {
+          ...state,
+          maxValue: 1,
+          minValue: 0,
+          num: 0
+        }
     }
 
+    case "SET_DISABLED": {
+      return {
+        ...state,
+        disabled: true
+      }
+    }
   }
-
 }
 
 type ActionType =
     | ReturnType<typeof buttonClickNumberAC>
     | ReturnType<typeof resetClickAC>
+    | ReturnType<typeof setDisabled>
 
 export const buttonClickNumberAC = () => {
     return {
@@ -40,8 +56,13 @@ export const buttonClickNumberAC = () => {
 export const resetClickAC = () => {
   return {
     type: 'BUTTON_RESET'
-  }as const
+  } as const
+}
 
+export const setDisabled = () => {
+  return {
+    type: 'SET_DISABLED'
+  } as const
 }
 
 export type PropsType = {
