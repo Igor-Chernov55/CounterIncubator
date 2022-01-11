@@ -1,67 +1,40 @@
-import React, {useState} from 'react';
-import './App.css';
-import {Counter} from "./CounterNumbers/Counter";
-import {CounterTask} from "./CounterNumbers/CounterTask/CounterTask";
-import classes from './CounterNumbers/Counter.module.css'
-import {ContainerCounter} from "./CounterNumbers/ContainerCounter";
+import React from 'react';
+import Counter from "./Counter/Counter";
+import classes from './App.module.css'
+import CounterTask from "./Counter/CounterTask";
+import {useDispatch, useSelector} from "react-redux";
+import {CounterType, numberInc, numberZero} from "./Redux/CounterReducer";
+import {AppStateType} from "./Redux/Counter-store";
 
-function App() {
-    let [num, setNum] = useState(0)
+export const App = () => {
 
-    let [maxVal, setMaxVal] = useState(1)
-    let [minVal, setMinVal] = useState(0)
+    const dispatch = useDispatch()
+    const counter = useSelector<AppStateType, CounterType>(state => state.CounterReducer)
 
-    let [disabled, setDiasbled] = useState<boolean>(false)
-    let [disabled2, setDiasbled2] = useState<boolean>(true)
-
-    const buttonClickForNumber = () => {
-        setNum(num + 1)
-
-        if (maxVal === num + 1) {
-            setDiasbled(true)
-        }
-        setDiasbled2(false)
-
+    const setNumber = () => {
+        dispatch(numberInc())
     }
 
-    const resetClick = () => {
-        setNum(minVal)
-        setDiasbled(false)
-        setDiasbled2(true)
+    const numZero = () => {
+        dispatch(numberZero())
     }
-
 
     return (
         <div className={classes.main}>
             <CounterTask
-                number={num}
-                setNumber={setNum}
-                minVal={minVal}
-                maxVal={maxVal}
-                setMaxVal={setMaxVal}
-                setMinVal={setMinVal}
-                setDisabled={setDiasbled}
-                setDisabled2={setDiasbled2}
+                number={counter.number}
+                maxValue={counter.maxValue}
+                minValue={counter.minValue}
+                disabled2={counter.disabled2}
+                disabled1={counter.disabled1}
             />
-
-
-            <ContainerCounter />
-            {/*<Counter*/}
-            {/*    number={num}*/}
-            {/*    setNumber={setNum}*/}
-            {/*    minVal={minVal}*/}
-            {/*    maxVal={maxVal}*/}
-            {/*    counter={buttonClickForNumber}*/}
-            {/*    resetClick={resetClick}*/}
-            {/*    disabled={disabled}*/}
-            {/*    disabled2={disabled2}*/}
-            {/*    setDisabled={setDiasbled}*/}
-            {/*    setDisabled2={setDiasbled2}*/}
-            {/*/>*/}
-
-
+            <Counter
+                setNumber={setNumber}
+                numZero={numZero}
+                number={counter.number}
+                minValue={counter.minValue}
+                disabled1={counter.disabled1}
+            />
         </div>
     );
-}
-
-export default App;
+};

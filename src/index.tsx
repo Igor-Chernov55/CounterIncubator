@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {App} from "./App";
 import {Provider} from "react-redux";
-import storeRedux from "./Redux/Redux-store";
-
+import {reduxStore} from "./Redux/Counter-store";
 
 ReactDOM.render(
-  <Provider store={storeRedux}>
-    <App />
-  </Provider>,
+    <Provider store={reduxStore}>
+        <App />
+    </Provider>,
   document.getElementById('root')
 );
 

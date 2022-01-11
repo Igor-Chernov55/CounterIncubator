@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid aqua;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.taskBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.numberError {
+    color: red;
+    font-weight: bold;
+}
+
+.numberFalse {
+    display: block;
+    color: red;
+}
+
+.numberTrue {
+    display: none;
+}
